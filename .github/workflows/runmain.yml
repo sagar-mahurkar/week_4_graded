@@ -49,12 +49,17 @@ jobs:
       - name: Checkout code version
         run: |
           echo "Checking out code version: ${{ matrix.data_version }}"
-          git fetch --tags
-          if git rev-parse ${{ matrix.data_version }} >/dev/null 2>&1; then
+          git fetch --all --tags --force
+          echo "Available tags:"
+          git tag -l
+          if git show-ref --tags | grep -q "refs/tags/${{ matrix.data_version }}"; then
+            git checkout tags/${{ matrix.data_version }} -b temp-${{ matrix.data_version }}
+          elif git rev-parse --verify ${{ matrix.data_version }} >/dev/null 2>&1; then
             git checkout ${{ matrix.data_version }}
           else
             echo "Tag or branch ${{ matrix.data_version }} not found. Staying on current commit."
           fi
+
 
       # --- Configure DVC Remote and Pull Data ---
       - name: Setup DVC Remote and Pull Data
@@ -96,3 +101,4 @@ jobs:
           echo "\`\`\`" >> report.md
 
           cml comment create --publish report.md
+
