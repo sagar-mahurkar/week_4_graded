@@ -1,17 +1,15 @@
-# Graded Assignment 2
+# Graded Assignment 4
 
-### Assignment Objective
+### Assignment Objectives
 
-Incorporate DVC for the local data into the homework pipeline.
+- Setup IRIS homework pipeline into a GitHub repository with two branches dev and main
 
-Setup DVC in IRIS Pipeline we have setup as part of Week-1 Assignment
+- create evaluation and data validation unit tests using pytest or unittest
 
-1. Setup the git repository
+- for evaluation and testing, configure the Continuous Integration (CI) with GitHub Actions to fetch the model and data needed for evaluation from DVC configured in Week-3
 
-2. Configure DVC to use Google Cloud storage bucket as Remote storage
+- push inclusion of pytest code changes to dev branch and raise Pull Request to main branch
 
-3. Augment the IRIS data to simulate the data additions and start training
+- Every branch should have its own CI on push or PR merge
 
-4. Demonstrate storing data and model files as part of DVC
-
-5. Demonstrate the ability to traverse through data versions effortlessly using dvc checkout
+- Run a sanity test using GitHub actions printing a report as a comment using cml.
